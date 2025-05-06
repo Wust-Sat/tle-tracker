@@ -1,0 +1,10 @@
+services:
+  TLE-tracker:
+    build: .
+    container_name: TLE_tracker
+    privileged: true
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ${PWD}:/app
