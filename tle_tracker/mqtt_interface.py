@@ -2,8 +2,7 @@ import paho.mqtt.client as mc
 from skyfield.api import load, EarthSatellite
 from datetime import datetime
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
-from tle_file_handler import TLEFileHandler, TLEFileWatcher
+from tle_tracker.tle_file_handler import TLEFileWatcher
 import threading
 
 TLE_FILE = "/home/ubuntu/tle.txt"
