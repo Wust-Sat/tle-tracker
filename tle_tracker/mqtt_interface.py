@@ -5,8 +5,6 @@ from watchdog.observers import Observer
 from tle_tracker.tle_file_handler import TLEFileWatcher
 import threading
 
-TLE_FILE = "/home/ubuntu/tle.txt"
-
 # for tests:
 # mosquitto_pub -h localhost -t cubesat/tle -m "1 25544U 98067A   20029.54791435  .00001264  00000-0  29621-4 0  9993\n2 25544  51.6434  21.3435 0007417 318.0083  42.0574 15.49176870211460"
 class MQTT_Interface:

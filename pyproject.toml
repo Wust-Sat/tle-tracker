@@ -1,6 +1,6 @@
 [project]
 name = "TLE-tracker"
-version = "0.1.0"
+version = "0.2.1"
 description = ""
 authors = [
     {name = "dawid.robak",email = "dawid.robak1704@gmail.com"}
@@ -21,7 +21,6 @@ build-backend = "poetry.core.masonry.api"
 poetry = "^2.1.2"
 
 [tool.poetry.dependencies]
-fastapi = "^0.115.12"
 uvicorn = "^0.34.2"
 skyfield = "^1.53"
 paho-mqtt = "^2.1.0"
