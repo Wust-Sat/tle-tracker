@@ -1,4 +1,30 @@
 # TLE (position) tracker
+
+TLE service for WUST-Sat OBC.
+
+
+### Tests and linter
+
+This project enforces code quality using listed tools:
+
+`black` - code formatter that ensures consistent style across the project  
+`isort` - organizes import statements into sections and alphabetically  
+`ruff` - linter for code quality checks and automatic fixes  
+
+You can test quality of code using `poe` command:
+
+`poe format` will automatically correct formatting, import order, and check if
+ruff returns errors.  
+`poe format_check` will run checkers and linters, but without editing the code.  
+
+
+## Dependecies
+
+Please install `mosquitto` or provide different MQTT server.
+
+
+## Features
+
 This repository enable starting service using **mqtt** library to calculate position:
 - latitide
 - longitude
