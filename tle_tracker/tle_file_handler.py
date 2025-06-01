@@ -36,13 +36,25 @@ class TLEFileHandler(FileSystemEventHandler):
 
 class TLEFileWatcher:
     def __init__(self, mqtt_iface, folder_path=TLE_FOLDER_PATH):
+        self.folder_path = Path(folder_path)
+        self.folder_exists = self.folder_path.exists()
         self.event_handler = TLEFileHandler(mqtt_iface, folder_path)
         self.observer = Observer()
-        self.observer.schedule(
-            self.event_handler, path=folder_path, recursive=False
-        )
+
+        if self.folder_exists:
+            self.observer.schedule(
+                self.event_handler, path=folder_path, recursive=False
+            )
+        else:
+            print(
+                f"[WARNING] Folder '{folder_path}' does not exist. "
+                "TLE watcher will not start."
+            )
 
     def start(self):
+        if not self.folder_exists:
+            return
+
         latest = self.event_handler.get_latest_file()
         if latest:
             with open(latest, "r") as f:

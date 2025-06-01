@@ -80,10 +80,14 @@ class MQTT_Interface:
         self.client.loop_forever()
 
 
-if __name__ == "__main__":
+def main():
     mqtt_iface = MQTT_Interface()
 
     watcher = TLEFileWatcher(mqtt_iface)
     threading.Thread(target=watcher.start, daemon=True).start()
 
     mqtt_iface.loop()
+
+
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,6 @@
 
 TLE service for WUST-Sat OBC.
 
-
 ### Tests and linter
 
 This project enforces code quality using listed tools:
@@ -17,6 +16,14 @@ You can test quality of code using `poe` command:
 ruff returns errors.  
 `poe format_check` will run checkers and linters, but without editing the code.  
 
+## TLE Tracker on Raspberry Pi
+
+To deploy and run the `TLE_tracker` service on a Raspberry Pi, use the dedicated Ansible playbook:
+
+**Playbook:** [`tle-tracker.yml`](https://github.com/Wust-Sat/obc-system/tree/master/playbooks)
+
+**Repository:** [`Wust-Sat/obc-system`](https://github.com/Wust-Sat/obc-system)
+
 
 ## Dependecies
 
@@ -24,13 +31,13 @@ Please install `mosquitto` or provide different MQTT server.
 
 
 ## Features
-
-This repository enable starting service using **mqtt** library to calculate position:
+This repository enable starting service using **mqtt** library to calculate position of satellite:
+- time of the request
 - latitide
 - longitude
 - altitude (in km)
   
-To calculate posittion of a satellite client needs **TLE** (2 lines) and broker (**mosquitto**). You can always sen TLE via terminal like this:
+To calculate posittion of a satellite client needs **TLE** (2 lines) and broker (**mosquitto**). You can always send TLE via terminal like this:
  ```bash
 mosquitto_pub -h localhost -t cubesat/tle -m "1 25544U 98067A   20029.54791435  .00001264  00000-0  29621-4 0  9993\n2 25544  51.6434  21.3435 0007417 318.0083  42.0574 15.49176870211460"
 ```
@@ -41,8 +48,20 @@ If you wish to use this in your code you need to import:
 import paho.mqtt.client as mc
 ```
 
+## Operating the Library via Shell Commands
 
-## Listening
+`TLE_tracker` primarily uses files located in the **/var/lib/tle** folder. It monitors the most recent file in this directory and extracts TLE lines from it when available. 
+
+If the folder does not exist, a warning message will be displayed during `tle_tracker` runtime. In that case, updating TLE lines is only possible through MQTT topics.
+
+```bash
+mosquitto_pub -h localhost -t cubesat/tle -m "1 25544U 98067A   20029.54791435  .00001264  00000-0  29621-4 0  9993\n2 25544  51.6434  21.3435 0007417 318.0083  42.0574 15.49176870211460"
+mosquitto_sub -h localhost -t cubesat/req_position -m ""
+mosquitto_sub -h localhost -t cubesat/req_last_update -m ""
+```
+
+
+## Listening inside your program
 In order to get position or time of last update you need:
 ```python
 def __init__(self, broker="localhost", port=1883):
@@ -65,7 +84,7 @@ def on_message(self, client, userdata, msg):
         elif msg.topic == "cubesat/last_update":
             func_for_what_to_do2()
 ```
-## Getting info
+## Requesting info inside program
 In order to make request for position info:
 ```python
     def get_pos_info():
