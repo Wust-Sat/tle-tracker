@@ -1,6 +1,6 @@
 [project]
 name = "TLE-tracker"
-version = "0.2.1"
+version = "0.3.0"
 description = ""
 authors = [
     {name = "dawid.robak",email = "dawid.robak1704@gmail.com"}
