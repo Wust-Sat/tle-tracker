@@ -70,3 +70,9 @@ ignore = [
     "I",  # isort
     "E501",  # Line too long, handled by black
 ]
+
+
+[tool.pytest.ini_options]
+markers = [
+    "timeout: limit test duration"
+]

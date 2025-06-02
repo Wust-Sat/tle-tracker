@@ -37,5 +37,8 @@ jobs:
       - name: Run format check
         run: poetry run poe format_check
 
+      - name: Run mqtt interface in background
+        run: poetry run python mqtt_interface.py &
+
       - name: Run tests
         run: poetry run pytest
