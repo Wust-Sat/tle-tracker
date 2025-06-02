@@ -40,5 +40,8 @@ jobs:
       - name: Run mqtt interface in background
         run: poetry run python tle_tracker/mqtt_interface.py &
 
+      - name: Wait for MQTT interface to be ready
+        run: sleep 2
+
       - name: Run tests
         run: poetry run pytest
