@@ -47,6 +47,8 @@ isort_check = "isort --check ${ALL_FOLDERS}"
 ruff = "ruff check ${ALL_FOLDERS}"
 ruff_fix = "ruff check --fix ${ALL_FOLDERS}"
 
+test = "pytest -vs ."
+
 format = ["black", "isort", "ruff_fix"]
 format_check = ["black_check", "isort_check", "ruff"]
 
