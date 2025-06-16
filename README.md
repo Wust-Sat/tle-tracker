@@ -95,3 +95,12 @@ In order to make request for last_update time:
     def get_update_time_info():
         self.client.publish("cubesat/req_last_update","")
 ```
+
+## Problems with ROS plugins
+If you encounter a problem that during tests ROS plugins are being loaded and that causes errors that in your **.venv/bin/activate**:
+```bash
+...
+export PYTHONPATH=""
+hash -r 2> /dev/null
+```
+or run you tests with: **env PYTHONPATH=**

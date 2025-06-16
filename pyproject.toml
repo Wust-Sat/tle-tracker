@@ -47,7 +47,7 @@ isort_check = "isort --check ${ALL_FOLDERS}"
 ruff = "ruff check ${ALL_FOLDERS}"
 ruff_fix = "ruff check --fix ${ALL_FOLDERS}"
 
-test = "pytest -vs ."
+unit_test = "env PYTHONPATH= pytest -vs ."
 
 format = ["black", "isort", "ruff_fix"]
 format_check = ["black_check", "isort_check", "ruff"]
@@ -78,3 +78,7 @@ ignore = [
 markers = [
     "timeout: limit test duration"
 ]
+addopts = """
+    -p no:launch_testing_ros_pytest_entrypoint
+    -p no:launch_testing
+"""
